@@ -16,7 +16,7 @@ def generate_random_string(length):
     letters = string.ascii_letters + string.digits
     return ''.join(random.choice(letters) for _ in range(length))
 
-def get_spotify_uath_url():
+def get_spotify_auth_url():
     state = generate_random_string(16)
     auth_url = "https://accounts.spotify.com/authorize?" + urlencode({
         "response_type": "code",
