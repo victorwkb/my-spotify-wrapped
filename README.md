@@ -1,2 +1,22 @@
-# my-spotify-wrapped
-A project that utilises Spotify API to generate insightful analytics about user data, inspired by the popular "Spotify-Wrapped" feature.
+# My Spotify Wrapped (WIP)
+This project uses Spotify's API to generate insightful analytics about user data and it's inspired by the popular "Spotify-Wrapped" feature.
+
+<!--
+### Data Visualistaion
+
+
+### Data Architecture
+
+
+## Prerequisites
+
+
+## How to run this project
+
+
+## Lessons Learned
+
+
+## Contact
+-->
+
