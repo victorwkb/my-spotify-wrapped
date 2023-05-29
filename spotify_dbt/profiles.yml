@@ -1,0 +1,40 @@
+victor:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: [localhost]
+      user: [airflow]
+      password: [airflow]
+      port: [5432]
+      dbname: "airflow"
+      schema: "demo"
+      keepalives_idle: 0 # default 0, indicating the system default. See below
+      connect_timeout: 10 # default 10 seconds
+      retries: 1  # default 1 retry on error/timeout when opening connections
+
+
+spotify-wrapped:
+  outputs:
+
+    dev:
+      type: postgres
+      threads: 1
+      host: "localhost"
+      port: 5432
+      user: "airflow"
+      pass: "airflow"
+      dbname: "airflow"
+      schema: "demo"
+
+    prod:
+      type: postgres
+      threads: [1 or more]
+      host: [host]
+      port: [port]
+      user: [prod_username]
+      pass: [prod_password]
+      dbname: [dbname]
+      schema: [prod_schema]
+
+  target: dev
