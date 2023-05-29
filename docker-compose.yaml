@@ -302,8 +302,9 @@ services:
     env_file:
       - ./env/postgres.env
     volumes:
-      - ./postgres_analytics:/var/lib/postgrseql/data/mydb
+      - postgres-analytics:/var/lib/postgresql/data
     restart: always
 
 volumes:
   postgres-db-volume:
+  postgres-analytics:
