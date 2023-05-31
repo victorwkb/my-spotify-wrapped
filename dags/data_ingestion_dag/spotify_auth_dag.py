@@ -1,8 +1,9 @@
-from datetime import datetime
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
-from spotify_auth import exchange_code_for_tokens, get_spotify_auth_url
+from datetime import datetime
 from datetime import timedelta
+from dotenv import load_dotenv
+from spotify_auth import get_spotify_auth_url
 
 default_args = {
     'start_date': datetime(2023, 5, 18),
@@ -18,6 +19,7 @@ dag = DAG(
     schedule_interval=None
 )
 
+load_dotenv()
 
 def authorize_spotify():
     auth_url, state = get_spotify_auth_url()
