@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from urllib.parse import urlencode, urlparse, parse_qs
 
@@ -35,7 +35,8 @@ def handle_callback(auth_url, redirect_uri, spotify_email, spotify_password):
     # firefox webdriver
     options = Options()
     options.headless = True
-    driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver', options=options)
+    driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver',
+                               options=options)
     driver.get(auth_url)
     
     # login to spotify
@@ -81,14 +82,16 @@ def exchange_code_for_tokens(code, client_id, client_secret, redirect_uri, state
         }
     }
     # exchange code for tokens
-    response = requests.post(url=auth_options['url'], data=auth_options['data'], headers=auth_options['headers'])
+    response = requests.post(url=auth_options['url'], data=auth_options['data'],
+                             headers=auth_options['headers'])
     if response.status_code == 200:
         data = response.json()
         access_token = data["access_token"]
         refresh_token = data["refresh_token"]
         return access_token, refresh_token
     else:
-        raise Exception(f"Failed to exchange code for tokens", response.status_code)
+        raise Exception("Failed to exchange code for tokens, " +
+                        f"status code {response.status_code}")
 
 def refresh_access_token(refresh_token, client_id, client_secret):
     message = f"{client_id}:{client_secret}"
@@ -108,12 +111,14 @@ def refresh_access_token(refresh_token, client_id, client_secret):
         }
     }
     # request new access token
-    response = requests.post(auth_options["url"], data=auth_options["data"], headers=auth_options["headers"])
+    response = requests.post(auth_options["url"], data=auth_options["data"],
+                             headers=auth_options["headers"])
     if response.status_code == 200:
         data = response.json()
         print(data)
         refreshed_token = data["access_token"]
         return refreshed_token
     else:
-        raise Exception(f"Failed to refresh access token", response.status_code)
+        raise Exception("Failed to refresh access token, " +
+                        f"status code {response.status_code}")
 

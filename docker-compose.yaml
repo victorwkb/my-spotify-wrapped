@@ -295,16 +295,5 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-  postgres-analytics:
-    image: postgres:13-alpine
-    ports: 
-      - 5432:5432
-    env_file:
-      - ./env/postgres.env
-    volumes:
-      - postgres-analytics:/var/lib/postgresql/data
-    restart: always
-
 volumes:
   postgres-db-volume:
-  postgres-analytics:
